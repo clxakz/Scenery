@@ -1,4 +1,5 @@
 import { ipcRenderer, contextBridge } from "electron";
+import { version } from "../../package.json";
 
 contextBridge.exposeInMainWorld("ipcRenderer", {
 	on(...args: Parameters<typeof ipcRenderer.on>) {
@@ -19,5 +20,9 @@ contextBridge.exposeInMainWorld("ipcRenderer", {
 	invoke(...args: Parameters<typeof ipcRenderer.invoke>) {
 		const [channel, ...omit] = args;
 		return ipcRenderer.invoke(channel, ...omit);
+	},
+
+	getAppVersion() {
+		return version;
 	},
 });
