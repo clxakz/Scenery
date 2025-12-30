@@ -31,21 +31,21 @@ export default function HeaderBar() {
 						placeholder="search scenes..."
 						value={searchInput}
 						onChange={(e) => setSearchInput(e.target.value)}
-						className="w-fit pl-7"
+						className="w-fit pl-7 shadow-none"
 					/>
 				</div>
 			</section>
 
 			<section className="flex gap-1">
-				<ToggleGroup type="single" defaultValue={theme} className="border">
-					<ToggleGroupItem value="light" onClick={() => setTheme("light")}>
+				<div className="flex rounded-md border overflow-hidden divide-border divide-x">
+					<Button className="rounded-none" variant={theme === "light" ? "secondary" : "ghost"} onClick={() => setTheme("light")}>
 						<Sun />
-					</ToggleGroupItem>
+					</Button>
 
-					<ToggleGroupItem value="dark" onClick={() => setTheme("dark")}>
+					<Button className="rounded-none" variant={theme === "dark" ? "secondary" : "ghost"} onClick={() => setTheme("dark")}>
 						<Moon />
-					</ToggleGroupItem>
-				</ToggleGroup>
+					</Button>
+				</div>
 
 				<Button onClick={() => openDialog("New-Scene")}>
 					New <Plus />

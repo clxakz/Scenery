@@ -2,9 +2,15 @@ import { app, BrowserWindow } from "electron";
 import { join } from "path";
 import { electronApp, is } from "@electron-toolkit/utils";
 import { useApi } from "./api";
+import { autoUpdater } from "electron-updater";
+
+autoUpdater.autoDownload = true;
+autoUpdater.autoInstallOnAppQuit = true;
+
+let mainWindow: BrowserWindow | null = null;
 
 function createWindow(): void {
-	const mainWindow = new BrowserWindow({
+	mainWindow = new BrowserWindow({
 		width: 930,
 		height: 600,
 		minWidth: 600,
@@ -24,7 +30,7 @@ function createWindow(): void {
 	});
 
 	mainWindow.on("ready-to-show", () => {
-		mainWindow.show();
+		mainWindow!.show();
 	});
 
 	mainWindow.setMenu(null);
@@ -41,6 +47,14 @@ app.whenReady().then(() => {
 	electronApp.setAppUserModelId("com.clxakz.scenery");
 	createWindow();
 	useApi();
+
+	mainWindow?.webContents.once("did-finish-load", () => {
+		autoUpdater.checkForUpdates();
+
+		autoUpdater.on("download-progress", (progress: any) => {
+			mainWindow?.webContents.send("update-download-progress", progress.percent);
+		});
+	});
 });
 
 app.on("window-all-closed", () => {

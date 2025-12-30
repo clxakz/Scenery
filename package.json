@@ -1,6 +1,6 @@
 {
 	"name": "scenery",
-	"version": "1.1.0",
+	"version": "1.0.0",
 	"description": "Enhance your workflow with Scenery",
 	"main": "./out/main/index.js",
 	"author": "clxakz",
@@ -21,6 +21,7 @@
 		"@tailwindcss/vite": "^4.1.18",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
+		"electron-updater": "^6.6.2",
 		"jotai": "^2.16.1",
 		"lucide-react": "^0.562.0",
 		"motion": "^12.23.26",
