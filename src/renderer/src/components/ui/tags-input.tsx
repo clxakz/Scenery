@@ -65,7 +65,7 @@ export default function TagsInput({ value, onChange, placeholder = "Add tag and 
 				onChange={(e) => setInput(e.target.value)}
 				onKeyDown={onKeyDown}
 				placeholder={placeholder}
-				className="h-7 w-auto min-w-30 flex-1 border-none p-0 shadow-none focus-visible:ring-0 bg-transparent!"
+				className="h-7 w-auto min-w-30 flex-1 border-none p-0 shadow-none focus-visible:ring-0 bg-transparent! px-3"
 			/>
 		</div>
 	);
