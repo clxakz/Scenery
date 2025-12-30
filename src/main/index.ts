@@ -7,6 +7,8 @@ function createWindow(): void {
 	const mainWindow = new BrowserWindow({
 		width: 930,
 		height: 600,
+		minWidth: 600,
+		minHeight: 400,
 		alwaysOnTop: is.dev,
 		show: false,
 		titleBarStyle: "hidden",

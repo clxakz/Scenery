@@ -60,9 +60,9 @@
 }
 
 .dark {
-	--background: oklch(0 0 0);
+	--background: oklch(18.674% 0.00002 271.152);
 	--foreground: oklch(1 0 0);
-	--card: oklch(0.14 0 0);
+	--card: oklch(20.019% 0.00002 271.152);
 	--card-foreground: oklch(1 0 0);
 	--popover: oklch(0.18 0 0);
 	--popover-foreground: oklch(1 0 0);
@@ -180,4 +180,8 @@
 
 * {
 	font-family: "Inter", sans-serif;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+	display: none;
 }

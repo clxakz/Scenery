@@ -6,8 +6,8 @@ import { useDialog } from "@renderer/hooks/useDialog";
 import { useState } from "react";
 import { Badge } from "../ui/badge";
 import { Plus, X } from "lucide-react";
-import { TagsInput } from "../ui/tags-input";
 import useScenes from "@renderer/hooks/useScenes";
+import TagsInput from "../ui/tags-input";
 
 type FormFields = {
 	name: string;
@@ -81,9 +81,7 @@ export default function NewSceneForm() {
 						<Controller
 							control={control}
 							name="websites"
-							render={({ field }) => (
-								<TagsInput value={field.value} onValueChange={field.onChange} placeholder="e.g. www.example.com" />
-							)}
+							render={({ field }) => <TagsInput value={field.value} onChange={field.onChange} placeholder="e.g. www.example.com" />}
 						/>
 					</Field>
 
