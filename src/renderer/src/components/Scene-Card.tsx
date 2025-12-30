@@ -17,14 +17,14 @@ export default function SceneCard({ id, name, websites, files, index }: Scene & 
 			animate={{ opacity: 1, y: 0 }}
 			exit={{ opacity: 0, y: -10 }}
 			transition={{ delay: index * 0.2 }}
-			className="bg-card border rounded-md flex flex-col overflow-hidden min-h-60 max-h-60"
+			className="flex flex-col overflow-hidden border rounded-md bg-card min-h-60 max-h-60"
 		>
-			<section className="flex flex-col flex-1 px-4 py-2 overflow-y-auto scrollbar-hidden gap-1">
-				<h2 className="text-lg font-semibold truncate line-clamp-2 text-wrap">{name}</h2>
+			<section className="flex flex-col flex-1 gap-1 px-4 py-2 overflow-y-auto scrollbar-hidden">
+				<h2 className="text-lg font-semibold truncate line-clamp-2 text-wrap shrink-0">{name}</h2>
 
 				{websites.length > 0 ? (
 					<>
-						<p className="text-muted-foreground text-sm">websites</p>
+						<p className="text-sm text-muted-foreground">websites</p>
 						<div className="flex flex-wrap gap-1">
 							{websites.slice(0, 3).map((website, index) => (
 								<Badge key={index} variant={"secondary"} className="max-w-37.5">
@@ -36,12 +36,12 @@ export default function SceneCard({ id, name, websites, files, index }: Scene & 
 						</div>
 					</>
 				) : (
-					<p className="text-muted-foreground text-sm">0 websites</p>
+					<p className="text-sm text-muted-foreground">0 websites</p>
 				)}
 
 				{files.length > 0 ? (
 					<>
-						<p className="text-muted-foreground text-sm">files</p>
+						<p className="text-sm text-muted-foreground">files</p>
 						<div className="flex flex-wrap gap-1">
 							{files.slice(0, 3).map((file, index) => {
 								const parts = file.split(/[/\\]/);
@@ -53,14 +53,14 @@ export default function SceneCard({ id, name, websites, files, index }: Scene & 
 						</div>
 					</>
 				) : (
-					<p className="text-muted-foreground text-sm">0 files</p>
+					<p className="text-sm text-muted-foreground">0 files</p>
 				)}
 			</section>
 
-			<section className="border-t flex">
+			<section className="flex border-t">
 				<Button
 					variant={"ghost"}
-					className="rounded-none flex-1 border-r"
+					className="flex-1 border-r rounded-none"
 					onClick={() => {
 						setLoading(true);
 						window.ipcRenderer.invoke("run-scene", websites, files).then(() => setLoading(false));
@@ -69,7 +69,7 @@ export default function SceneCard({ id, name, websites, files, index }: Scene & 
 					{loading ? <Loader className="animate-spin" /> : <Play />}
 				</Button>
 
-				<Button variant={"ghost"} className="rounded-none flex-1" onClick={() => deleteScene(id)}>
+				<Button variant={"ghost"} className="flex-1 rounded-none" onClick={() => deleteScene(id)}>
 					<Trash />
 				</Button>
 			</section>

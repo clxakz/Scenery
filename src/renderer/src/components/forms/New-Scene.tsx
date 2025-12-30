@@ -18,6 +18,7 @@ export default function NewSceneForm() {
 	const { closeDialog } = useDialog();
 	const { registerScene } = useScenes();
 	const [files, setFiles] = useState<string[]>([]);
+	const [choosingFiles, setChoosingFiles] = useState<boolean>(false);
 
 	const {
 		register,
@@ -50,19 +51,30 @@ export default function NewSceneForm() {
 					<Field>
 						<FieldLabel>Files & Apps</FieldLabel>
 
-						<section className="flex flex-1 flex-col">
+						<section className="flex flex-col flex-1">
 							<Button
-								onClick={() =>
-									window.ipcRenderer.invoke("choose-files").then((files) => setFiles((prev) => [...(prev || []), ...files]))
-								}
+								onClick={() => {
+									if (choosingFiles) return;
+
+									setChoosingFiles(true);
+									window.ipcRenderer
+										.invoke("choose-files")
+										.then((files) => {
+											setFiles((prev) => [...(prev || []), ...files]);
+										})
+										.finally(() => {
+											setChoosingFiles(false);
+										});
+								}}
 								type="button"
 								variant={"secondary"}
+								disabled={choosingFiles}
 							>
 								Add File <Plus />
 							</Button>
 
 							{files && files.length > 0 ? (
-								<div className="flex flex-wrap gap-1 mt-2 max-h-20 overflow-auto">
+								<div className="flex flex-wrap gap-1 mt-2 overflow-auto max-h-20">
 									{files.map((file, index) => {
 										const parts = file.split(/[/\\]/);
 										const filename = parts[parts.length - 1];
@@ -70,7 +82,7 @@ export default function NewSceneForm() {
 									})}
 								</div>
 							) : (
-								<p className="text-muted-foreground text-sm">No files selected</p>
+								<p className="text-sm text-muted-foreground">No files selected</p>
 							)}
 						</section>
 					</Field>
@@ -81,7 +93,9 @@ export default function NewSceneForm() {
 						<Controller
 							control={control}
 							name="websites"
-							render={({ field }) => <TagsInput value={field.value} onChange={field.onChange} placeholder="e.g. www.example.com" />}
+							render={({ field }) => (
+								<TagsInput value={field.value} onChange={field.onChange} placeholder="enter a url and press enter" />
+							)}
 						/>
 					</Field>
 
@@ -100,9 +114,8 @@ function FileBadge({ filename, index, setFiles }: { filename: string; index: num
 			{filename}
 
 			<Button
-				size={"icon"}
-				variant={"ghost"}
-				className="size-4 rounded-full"
+				type="button"
+				className="size-3 rounded-full bg-transparent hover:text-destructive p-0!"
 				onClick={() => {
 					setFiles((prev) => prev?.filter((_, i) => i !== index) || null);
 				}}

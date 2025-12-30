@@ -47,15 +47,15 @@ export default function TagsInput({ value, onChange, placeholder = "Add tag and 
 	return (
 		<div
 			className={cn(
-				"flex flex-wrap gap-1 rounded-md border border-input shadow-xs dark:bg-input/30 px-1 py-1 focus-within:ring-2 focus-within:ring-ring max-h-20 overflow-y-auto",
+				"flex flex-wrap gap-1 rounded-md border border-input shadow-xs dark:bg-input/30 px-1 py-1 focus-within:ring-1 focus-within:ring-ring max-h-20 overflow-y-auto",
 				className
 			)}
 		>
 			{tags.map((tag) => (
 				<Badge key={tag} variant="secondary" className="flex items-center gap-1 max-w-37.5">
 					<span className="truncate">{tag}</span>
-					<button type="button" onClick={() => removeTag(tag)} className="rounded-sm hover:bg-muted">
-						<X className="h-3 w-3" />
+					<button type="button" onClick={() => removeTag(tag)} className="rounded-sm hover:text-destructive">
+						<X className="w-3 h-3" />
 					</button>
 				</Badge>
 			))}

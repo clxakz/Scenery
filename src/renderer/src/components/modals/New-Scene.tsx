@@ -1,5 +1,5 @@
 import NewSceneForm from "../forms/New-Scene";
-import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../ui/dialog";
+import { DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 
 export default function NewSceneDialog() {
 	return (

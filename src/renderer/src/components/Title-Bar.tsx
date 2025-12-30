@@ -20,7 +20,7 @@ export default function TitleBar() {
 				<p className="text-xs text-muted-foreground">{Math.floor(progress)}% downloading update</p>
 			)}
 
-			<p className="text-sm justify-center flex flex-1">scenery</p>
+			<p className="flex justify-center flex-1 text-sm">scenery</p>
 		</div>
 	);
 }
