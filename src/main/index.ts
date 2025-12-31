@@ -8,6 +8,7 @@ autoUpdater.autoDownload = true;
 autoUpdater.autoInstallOnAppQuit = true;
 
 let mainWindow: BrowserWindow | null = null;
+const gotLock = app.requestSingleInstanceLock();
 
 function createWindow(): void {
 	mainWindow = new BrowserWindow({
@@ -43,19 +44,30 @@ function createWindow(): void {
 	}
 }
 
-app.whenReady().then(() => {
-	electronApp.setAppUserModelId("com.clxakz.scenery");
-	createWindow();
-	useApi();
+if (!gotLock) {
+	app.quit();
+} else {
+	app.on("second-instance", () => {
+		if (mainWindow) {
+			if (mainWindow.isMinimized()) mainWindow.restore();
+			mainWindow.focus();
+		}
+	});
 
-	mainWindow?.webContents.once("did-finish-load", () => {
-		autoUpdater.checkForUpdates();
+	app.whenReady().then(() => {
+		electronApp.setAppUserModelId("com.clxakz.scenery");
+		createWindow();
+		useApi();
 
-		autoUpdater.on("download-progress", (progress: any) => {
-			mainWindow?.webContents.send("update-download-progress", progress.percent);
+		mainWindow?.webContents.once("did-finish-load", () => {
+			autoUpdater.checkForUpdates();
+
+			autoUpdater.on("download-progress", (progress: any) => {
+				mainWindow?.webContents.send("update-download-progress", progress.percent);
+			});
 		});
 	});
-});
+}
 
 app.on("window-all-closed", () => {
 	if (process.platform !== "darwin") {

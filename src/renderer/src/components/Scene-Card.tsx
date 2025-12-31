@@ -57,10 +57,10 @@ export default function SceneCard({ id, name, websites, files, index }: Scene & 
 				)}
 			</section>
 
-			<section className="flex border-t">
+			<section className="flex border-t divide-x">
 				<Button
 					variant={"ghost"}
-					className="flex-1 border-r rounded-none"
+					className="flex-1 rounded-none"
 					onClick={() => {
 						setLoading(true);
 						window.ipcRenderer.invoke("run-scene", websites, files).then(() => setLoading(false));
