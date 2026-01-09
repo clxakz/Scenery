@@ -31,7 +31,9 @@ function createWindow(): void {
 	});
 
 	mainWindow.on("ready-to-show", () => {
-		mainWindow!.show();
+		mainWindow?.webContents.on("dom-ready", () => {
+			mainWindow!.show();
+		});
 	});
 
 	mainWindow.setMenu(null);

@@ -5,7 +5,7 @@ import { Loader, Play, Trash } from "lucide-react";
 import useScenes from "@renderer/hooks/useScenes";
 import { useState } from "react";
 import { motion } from "motion/react";
-import vscodeicon from "../assets/vscode.svg";
+import { BiLogoVisualStudio } from "react-icons/bi";
 
 export default function SceneCard({ id, name, websites, files, workspaces, index }: Scene & { index: number }) {
 	const { deleteScene } = useScenes();
@@ -17,7 +17,7 @@ export default function SceneCard({ id, name, websites, files, workspaces, index
 			initial={{ opacity: 0, y: -10 }}
 			animate={{ opacity: 1, y: 0 }}
 			exit={{ opacity: 0, y: -10 }}
-			transition={{ delay: index * 0.2 }}
+			transition={{ delay: index * 0.1 }}
 			className="flex flex-col overflow-hidden border rounded-md bg-card min-h-80 max-h-80"
 		>
 			<section className="flex flex-col flex-1 gap-1 px-4 py-2 overflow-y-auto scrollbar-hidden">
@@ -60,7 +60,7 @@ export default function SceneCard({ id, name, websites, files, workspaces, index
 				{workspaces.length > 0 ? (
 					<>
 						<div className="flex items-center gap-1">
-							<img src={vscodeicon} className="size-4" />
+							<BiLogoVisualStudio size={15} className="text-blue-500" />
 							<p className="text-sm text-muted-foreground">workspaces</p>
 						</div>
 						<div className="flex flex-wrap gap-1">

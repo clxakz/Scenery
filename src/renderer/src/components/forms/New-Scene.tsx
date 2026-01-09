@@ -8,7 +8,7 @@ import { Badge } from "../ui/badge";
 import { Plus, X } from "lucide-react";
 import useScenes from "@renderer/hooks/useScenes";
 import TagsInput from "../ui/tags-input";
-import vscodeicon from "../../assets/vscode.svg";
+import { BiLogoVisualStudio } from "react-icons/bi";
 
 type FormFields = {
 	name: string;
@@ -63,7 +63,7 @@ export default function NewSceneForm() {
 					<Field>
 						<FieldLabel>
 							<div className="flex items-center gap-1 leading-1">
-								<img src={vscodeicon} className="size-4" />
+								<BiLogoVisualStudio size={15} className="text-blue-500" />
 								VS Code Workspaces
 							</div>
 						</FieldLabel>
