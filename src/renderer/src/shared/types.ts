@@ -3,4 +3,5 @@ export type Scene = {
 	name: string;
 	websites: string[];
 	files: string[];
+	workspaces: string[];
 };

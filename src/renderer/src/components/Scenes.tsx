@@ -10,7 +10,7 @@ export default function Scenes() {
 
 	return (
 		<div className="overflow-y-auto scrollbar-hidden">
-			<motion.div className="grid grid-cols-2 gap-2 overflow-hidden sm:grid-cols-3">
+			<motion.div className="grid grid-cols-2 gap-2 overflow-hidden sm:grid-cols-3 xl:grid-cols-4">
 				<AnimatePresence mode="popLayout">
 					{scenes
 						?.filter((scene) => scene.name.toLowerCase().includes(searchInput.toLowerCase()))

@@ -11,7 +11,7 @@ export default function TitleBar() {
 	}, []);
 
 	return (
-		<div className="h-6.5 w-full border-b bg-secondary window-drag flex items-center justify-center relative">
+		<div className="h-6.5 w-full z-100 border-b bg-secondary window-drag flex items-center justify-center relative">
 			<p className="text-xs text-muted-foreground absolute left-1">
 				{progress === null
 					? `${window.ipcRenderer.getAppVersion()}`

@@ -12,8 +12,8 @@ const gotLock = app.requestSingleInstanceLock();
 
 function createWindow(): void {
 	mainWindow = new BrowserWindow({
-		width: 930,
-		height: 600,
+		width: 1100,
+		height: 730,
 		minWidth: 600,
 		minHeight: 400,
 		alwaysOnTop: is.dev,

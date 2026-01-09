@@ -21,9 +21,9 @@ const scenesATOM = atom<Scene[] | null>(null);
 export default function useScenes() {
 	const [scenes, setScenes] = useAtom(scenesATOM);
 
-	const registerScene = ({ id, name, websites, files }: Scene) => {
-		const newScene: Scene = { id, name, websites, files };
-		setScenes((prev) => [...prev!, newScene]);
+	const registerScene = ({ id, name, websites, files, workspaces }: Scene) => {
+		const newScene: Scene = { id, name, websites, files, workspaces };
+		setScenes((prev) => [...(prev ?? []), newScene]);
 	};
 
 	const deleteScene = (id: string) => {
