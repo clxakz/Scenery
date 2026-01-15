@@ -2,19 +2,20 @@ import { Moon, Plus, Search, Sun } from "lucide-react";
 import { Button } from "./ui/button";
 import { useDialog } from "@renderer/hooks/useDialog";
 import useScenes from "@renderer/hooks/useScenes";
-import { useTheme } from "./Theme-Provider";
 import { Input } from "./ui/input";
 import { atom, useAtom } from "jotai";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Kbd, KbdGroup } from "./ui/kbd";
+import { useThemeAnimation } from "@space-man/react-theme-animation";
 
 export const SearchQueryATOM = atom<string>("");
 
 export default function HeaderBar() {
 	const { openDialog } = useDialog();
 	const { scenes } = useScenes();
-	const { theme, setTheme } = useTheme();
 	const [searchInput, setSearchInput] = useAtom(SearchQueryATOM);
+
+	const { theme, ref, toggleTheme } = useThemeAnimation();
 
 	return (
 		<header className="flex items-center justify-between">
@@ -38,15 +39,9 @@ export default function HeaderBar() {
 			</section>
 
 			<section className="flex gap-1">
-				<div className="flex overflow-hidden border divide-x rounded-md divide-border">
-					<Button className="rounded-none" variant={theme === "light" ? "secondary" : "ghost"} onClick={() => setTheme("light")}>
-						<Sun />
-					</Button>
-
-					<Button className="rounded-none" variant={theme === "dark" ? "secondary" : "ghost"} onClick={() => setTheme("dark")}>
-						<Moon />
-					</Button>
-				</div>
+				<Button ref={ref} variant={"outline"} onClick={() => toggleTheme()}>
+					{theme === "dark" ? <Moon /> : <Sun />}
+				</Button>
 
 				<Tooltip>
 					<TooltipTrigger asChild>
